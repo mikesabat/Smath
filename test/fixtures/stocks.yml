@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  symbol: MyText
+  win_percentage: 9.99
+
+two:
+  symbol: MyText
+  win_percentage: 9.99

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stock:</b>
+  <%= @quote.stock_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @quote.date %>
+</p>
+
+<p>
+  <b>Day neg1 open:</b>
+  <%= @quote.day_neg1_open %>
+</p>
+
+<p>
+  <b>Day neg1 close:</b>
+  <%= @quote.day_neg1_close %>
+</p>
+
+<p>
+  <b>Day zero open:</b>
+  <%= @quote.day_zero_open %>
+</p>
+
+<p>
+  <b>Day zero close:</b>
+  <%= @quote.day_zero_close %>
+</p>
+
+<p>
+  <b>Win:</b>
+  <%= @quote.win %>
+</p>
+
+<p>
+  <b>Prediction:</b>
+  <%= @quote.prediction %>
+</p>
+
+
+<%= link_to 'Edit', edit_stock_quote_path(@quote) %> |
+<%= link_to 'Back', stock_quotes_path %>
