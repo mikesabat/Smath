@@ -9,7 +9,7 @@ class StocksController < ApplicationController
 
     respond_to do |format|
       if @stock.save
-        format.html { redirect_to @stock, :notice => 'Stock was successfully created.' }
+        format.html { redirect_to new_stock_quote_path(@stock), :notice => 'Stock was successfully created.' }
         format.json { render :json => @stock, :status => :created, :location => @stock }
       else
         format.html { render :action => "new" }
