@@ -1,42 +1,36 @@
-<h1>Listing quotes</h1>
+<h1>Listing quotes for <%= @stock.symbol %> </h1>
 
 <p>
-This stock has <%= @stock.quotes.size %> comments
+   This stock has <%= @stock.quotes.size %> quotes.
+</p>
 
 <p>
-
 <table>
   <tr>
-    <th>Stock</th>
     <th>Date</th>
-    <th>Day neg1 open</th>
-    <th>Day neg1 close</th>
-    <th>Day zero open</th>
-    <th>Day zero close</th>
-    <th>Win</th>
-    <th>Prediction</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <th>Win Y/N</th>
+    <th>Test prediction</th>
+  </tr> 
 
-<% @quotes.each do |quote| %>
-  <tr>
-    <td><%= quote.stock_id %></td>
-    <td><%= quote.date %></td>
-    <td><%= quote.day_neg1_open %></td>
-    <td><%= quote.day_neg1_close %></td>
-    <td><%= quote.day_zero_open %></td>
-    <td><%= quote.day_zero_close %></td>
-    <td><%= quote.win %></td>
-    <td><%= quote.prediction %></td>
-    <td><%= link_to 'Show', quote %></td>
-    <td><%= link_to 'Edit', edit_stock_quote_path(quote) %></td>
-    <td><%= link_to 'Destroy', quote, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <%= @stock.quotes.each do |quote| %>    
+    <tr>
+      <td> <%= quote.date %> </td>
+      <td> <%= quote.win %> </td> 
+      <td> <%= quote.prediction %> </td>          
+    </tr>   
+
+  <% end %>
+
 </table>
+<hr/> 
+</p>
 
-<br />
+Add A Quote:
 
-<%= link_to 'New Quote', new_stock_quote_path %>
+<p>
+  <%= form_for(Quote.new, :url => stock_quotes_path(@stock)) do |f| %>
+    <%= f.date_select :date %>
+    <%= f.select :stock_id, Stock.all.collect {|p| [p.symbol, p.id]} %>
+    <%= f.submit "Add Quote" %>
+  <% end %>
+</p>

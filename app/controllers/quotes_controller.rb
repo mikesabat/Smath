@@ -2,6 +2,7 @@ class QuotesController < ApplicationController
   # GET /quotes
   # GET /quotes.json
   def index
+    @stock = Stock.find(params[:stock_id])
     @quotes = Quote.all
 
     respond_to do |format|
@@ -44,13 +45,13 @@ class QuotesController < ApplicationController
   # POST /quotes
   # POST /quotes.json
   def create
-    @quote = Quote.new(params[:quote])
+    @quote = Quote.new(params[:quote]) #@quote = Quote.new(params[:quote][:stock])
     @stock = Stock.find(params[:stock_id])
 
     respond_to do |format|
       if @quote.save
         #not sure why '(@stock, @quote)' is needed, but this is the second time
-        format.html { redirect_to stock_quote_path(@stock, @quote), :notice => 'Quote was successfully created.' }
+        format.html { redirect_to stock_quotes_path(@stock), :notice => 'Quote was successfully created.' }
         format.json { render :json => @quote, :status => :created, :location => @quote }
       else
         format.html { render :action => "new" }

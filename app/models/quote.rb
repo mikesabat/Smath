@@ -4,10 +4,16 @@ class Quote < ActiveRecord::Base
     #should the stock model accept nested attributes for quotes - trying that instead
     #accepts_nested_attributes_for :stock
 
-    #before_save :lookup
-    #before_save :b_lookup
-    #before_save :predict
-    #before_save :track
+    before_save :lookup
+    before_save :b_lookup
+    before_save :predict
+    before_save :track
+    #before_save :ttt
+
+    def ttt
+      #@stock = Stock.find(params[:stock_id])
+      self.prediction = stock.symbol
+    end
 
     def lookup
         YahooFinance::get_historical_quotes( stock.symbol,
@@ -53,18 +59,21 @@ class Quote < ActiveRecord::Base
     end   
 
     def track
-        if prediction == "up" and day_zero_close > day_neg1_close
-            self.win = true
-        elsif prediction == "down" and day_zero_close < day_neg1_close
-            self.win = true
-        elsif prediction == "up" and day_zero_close < day_neg1_close
-            self.win = false
-        elsif prediction == "down" and day_zero_close > day_neg1_close
-            self.win = false
-        else
-            #puts "-----*****-------"
-            self.win = false
-        end
+      if prediction == "up" and day_zero_close > day_neg1_close
+        self.win = true
+      elsif prediction == "down" and day_zero_close < day_neg1_close
+        self.win = true
+      else
+        true
+      end
+        # elsif prediction == "up" and day_zero_close < day_neg1_close
+        #     self.win = false
+        # elsif prediction == "down" and day_zero_close > day_neg1_close
+        #     self.win = false
+        # else
+        #     #puts "-----*****-------"
+           #self.win = true
+        
     end
 
 end

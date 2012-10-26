@@ -1,0 +1,37 @@
+Old - Index
+<!-- <table>
+  <tr>
+    <th>Stock</th>
+    <th>Date</th>
+    <th>Day neg1 open</th>
+    <th>Day neg1 close</th>
+    <th>Day zero open</th>
+    <th>Day zero close</th>
+    <th>Win</th>
+    <th>Prediction</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @quotes.each #do |quote| %>
+  <tr>
+    <td><%= quote.stock_id %></td>
+    <td><%= quote.date %></td>
+    <td><%= quote.day_neg1_open %></td>
+    <td><%= quote.day_neg1_close %></td>
+    <td><%= quote.day_zero_open %></td>
+    <td><%= quote.day_zero_close %></td>
+    <td><%= quote.win %></td>
+    <td><%= quote.prediction %></td>
+    <td><%= link_to #'Show', stock_quote_path %></td>
+    <td><%= link_to #'Edit', edit_stock_quote_path(quote) %></td>
+    <td><%= link_to #'Destroy', quote, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% #end %>
+</table>
+
+<br />
+
+<%= link_to #'New Quote', new_stock_quote_path %>
+ -->
