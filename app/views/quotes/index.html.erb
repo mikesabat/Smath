@@ -2,11 +2,19 @@
 
 <p>
    This stock has <%= @stock.quotes.size %> quotes.
+   This stock has <%= @stock.quotes.where(:win => true).size %> Wins
+ <br/>
+ <br/>
+   <% win = @stock.quotes.where(:win => true).size %>
+   <% total = @stock.quotes.size %>
+   Win Percentage is <%= win.to_i / total.to_i * 100 %>
+   <%= 2 / 2 %>
 </p>
 
 <p>
 <table>
   <tr>
+    <th></th>
     <th>Date</th>
     <th>Win Y/N</th>
     <th>Test prediction</th>
@@ -14,6 +22,7 @@
 
   <%= @stock.quotes.each do |quote| %>    
     <tr>
+      <td><%= link_to 'Show', stock_quote_path(@stock, quote) %> </td>
       <td> <%= quote.date %> </td>
       <td> <%= quote.win %> </td> 
       <td> <%= quote.prediction %> </td>          
@@ -29,8 +38,7 @@ Add A Quote:
 
 <p>
   <%= form_for(Quote.new, :url => stock_quotes_path(@stock)) do |f| %>
-    <%= f.date_select :date %>
-    <%= f.select :stock_id, Stock.all.collect {|p| [p.symbol, p.id]} %>
+    <%= f.date_select :date %>    
     <%= f.submit "Add Quote" %>
   <% end %>
 </p>

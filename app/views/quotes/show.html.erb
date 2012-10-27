@@ -40,6 +40,6 @@
   <%= @quote.prediction %>
 </p>
 
-
+<%= link_to 'Destroy', stock_quote_path, :confirm => 'Are you sure?', :method => :delete %>
 <%= link_to 'Edit', edit_stock_quote_path(@quote) %> |
 <%= link_to 'Back', stock_quotes_path %>

@@ -47,6 +47,7 @@ class QuotesController < ApplicationController
   def create
     @quote = Quote.new(params[:quote]) #@quote = Quote.new(params[:quote][:stock])
     @stock = Stock.find(params[:stock_id])
+    @quote.stock_id = @stock.id
 
     respond_to do |format|
       if @quote.save
@@ -81,9 +82,10 @@ class QuotesController < ApplicationController
   def destroy
     @quote = Quote.find(params[:id])
     @quote.destroy
+    @stock = Stock.find(params[:stock_id])
 
     respond_to do |format|
-      format.html { redirect_to quotes_url }
+      format.html { redirect_to stock_path(@stock) }
       format.json { head :no_content }
     end
   end
