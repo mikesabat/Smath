@@ -26,4 +26,14 @@ class StocksController < ApplicationController
       format.json { render :json => @stock }
     end
   end
+
+  def index
+    @stock = Stock.all
+
+    respond_to do |format|
+      format.html #index.html.erb
+      format.json { render :json => @stock }
+    end
+  end
+
 end

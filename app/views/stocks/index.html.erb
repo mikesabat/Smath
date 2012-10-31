@@ -1,0 +1,21 @@
+<h1>Stock Index Page</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Stock</th>
+    <th></th>
+    <th>Win Percentage</th>
+    
+  </tr> 
+
+  <%= @stock.each do |stock| %>    
+    <tr>
+      <td><%= link_to 'Show', stock %> </td>
+      <td> <%= stock.symbol %> </td>
+      <td></td>
+      <td> <%= stock.win_percentage %> </td>          
+    </tr>       
+  <% end %>
+
+</table>

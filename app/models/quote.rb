@@ -16,6 +16,7 @@ class Quote < ActiveRecord::Base
     end
 
     def lookup
+      
         YahooFinance::get_historical_quotes( stock.symbol,
                                       date,
                                       date ) do |row|
@@ -24,16 +25,18 @@ class Quote < ActiveRecord::Base
               puts date
               puts "-----looking up day 0---------"
               self.day_zero_open = row[1]
-              self.day_zero_close = row[4]
+              self.day_zero_close = row[4]        
+        end        
+        puts "-------**--------#{date}"
 
-        end
+        # if date.wday == 1
+        #   self.day_zero_open = 1000
+        # end
     end
 
     def b_lookup
-        #puts "----**-----"
-        #puts date
-        d = date - 1.day
-        #puts d
+      d = date - 1.day 
+      if d.wday.between?(1, 4)     
 
         YahooFinance::get_historical_quotes( stock.symbol,
                                       d,
@@ -46,6 +49,10 @@ class Quote < ActiveRecord::Base
               self.day_neg1_close = row[4]
 
         end
+
+      else
+        false
+      end
     end
   
     def predict 
@@ -59,9 +66,9 @@ class Quote < ActiveRecord::Base
     end   
 
     def track
-      if prediction == "up" and day_zero_close > day_neg1_close
+      if prediction == "up" and day_zero_open > day_neg1_close
         self.win = true
-      elsif prediction == "down" and day_zero_close < day_neg1_close
+      elsif prediction == "down" and day_zero_open < day_neg1_close
         self.win = true
       else
         true

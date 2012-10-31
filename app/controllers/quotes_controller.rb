@@ -51,6 +51,7 @@ class QuotesController < ApplicationController
 
     respond_to do |format|
       if @quote.save
+        @stock.save
         #not sure why '(@stock, @quote)' is needed, but this is the second time
         format.html { redirect_to stock_quotes_path(@stock), :notice => 'Quote was successfully created.' }
         format.json { render :json => @quote, :status => :created, :location => @quote }
