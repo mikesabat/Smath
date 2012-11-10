@@ -1,13 +1,8 @@
 <h1>Listing quotes for <%= @stock.symbol %> </h1>
 
-<p>
-   Invalid Quotes: <%= @stock.quotes.where(:day_zero_open => 1000).size %>
-   This stock has <%= @stock.quotes.size %> quotes. 
-   This stock has <%= @stock.quotes.where(:win => true).size %> Wins
- 
-   <% win = @stock.quotes.where(:win => true).size %>
-   <% total = @stock.quotes.size %>
-   Win Percentage is <%= ((win.to_f / total)*100).round(2)  %>
+<p> 
+   <font color="red"><b>Win Percentage is</b></font> 
+   <%= @stock.win_percentage %>
    
 </p>
 

@@ -3,11 +3,48 @@
 <h1> Stock Symbol:  <%= @stock.symbol.upcase %> </h1>
 
 <p>  
-  This stock has <%= @stock.quotes.size %> Quotes
-</br>
-  This stock has <%= @stock.quotes.where(:win => true).size %> Quotes with wins.
+ 
 </br>
   <font color="red"><b>Prediction Win Percentage</b></font> 
-  <%= ((@stock.quotes.where(:win => true).size.to_f / @stock.quotes.size)*100).round(3) %>
+  <%= @stock.win_percentage %> <br/>
+  
+</p>
+<!-- 
+#adding quote list and form
+ -->
+<p>
+<table>
+  <tr>
+    <th></th>
+    <th>Date</th>
+    <th></th>
+    <th>Win Y/N</th>
+    <th></th>
+    <th>Test prediction</th>
+  </tr> 
+
+  <%= @stock.quotes.each do |quote| %>    
+    <tr>
+      <td><%= link_to 'Show', stock_quote_path(@stock, quote) %> </td>
+      <td> <%= quote.date %> </td>
+      <td></td>
+      <td> <%= quote.win %> </td> 
+      <td></td>
+      <td> <%= quote.prediction %> </td>          
+    </tr>   
+
+  <% end %>
+
+</table>
+<hr/> 
+</p>
+
+Add A Quote:
+
+<p>
+  <%= form_for(Quote.new, :url => stock_quotes_path(@stock)) do |f| %>
+    <%= f.date_select :date %>    
+    <%= f.submit "Add Quote" %>
+  <% end %>
 </p>
 

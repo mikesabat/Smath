@@ -84,6 +84,7 @@ class QuotesController < ApplicationController
     @quote = Quote.find(params[:id])
     @quote.destroy
     @stock = Stock.find(params[:stock_id])
+    @stock.save
 
     respond_to do |format|
       format.html { redirect_to stock_path(@stock) }
