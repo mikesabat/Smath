@@ -14,13 +14,15 @@
   
   <div class="field">
     <%= f.label :symbol %><br />
-    <%= f.text_field :symbol %>
+    <%= f.text_field :symbol %><br />
+
+    <%= f.label "Next Earnings Date" %><br />
+    <%= f.date_select :Quarter_1_date %>
   </div>
   
   <!-- 
   nested attributes from http://railscasts.com/episodes/196-nested-model-form-part-1
    -->
-  <%= @stock.quotes.size %>
   <%= f.fields_for :quotes do |builder| %>
     <p>
       <%= builder.date_select :date %><br /> 

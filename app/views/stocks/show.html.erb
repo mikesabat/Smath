@@ -7,6 +7,7 @@
 </br>
   <font color="red"><b>Prediction Win Percentage</b></font> 
   <%= @stock.win_percentage %> <br/>
+  $1,000 Investment returns: <%= @stock.bank %> 
   
 </p>
 <!-- 
@@ -23,24 +24,24 @@
     <th>Test prediction</th>
   </tr> 
 
-  <%= @stock.quotes.each do |quote| %>    
-    <tr>
+  <% @stock.quotes.each do |quote|  %>        
+    <tr>            
       <td><%= link_to 'Show', stock_quote_path(@stock, quote) %> </td>
-      <td> <%= quote.date %> </td>
+      <td> <%= quote.date %> </td> 
       <td></td>
       <td> <%= quote.win %> </td> 
       <td></td>
-      <td> <%= quote.prediction %> </td>          
+      <td> <%= quote.prediction %> </td> 
     </tr>   
 
   <% end %>
 
 </table>
-<hr/> 
+
 </p>
 
 Add A Quote:
-
+<hr/> 
 <p>
   <%= form_for(Quote.new, :url => stock_quotes_path(@stock)) do |f| %>
     <%= f.date_select :date %>    
