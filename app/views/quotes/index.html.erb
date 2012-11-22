@@ -1,4 +1,4 @@
-<h1>Listing quotes for <%= @stock.symbol %> </h1>
+<h1>Listing quotes for <%= @stock.symbol.upcase %> </h1>
 
 <p> 
    <font color="red"><b>Win Percentage is</b></font> 
@@ -17,7 +17,7 @@
     <th>Test prediction</th>
   </tr> 
 
-  <%= @stock.quotes.each do |quote| %>    
+  <% @stock.quotes.each do |quote| %>    
     <tr>
       <td><%= link_to 'Show', stock_quote_path(@stock, quote) %> </td>
       <td> <%= quote.date %> </td>

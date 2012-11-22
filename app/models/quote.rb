@@ -10,31 +10,18 @@ class Quote < ActiveRecord::Base
     before_save :price
     #before_save :predict
     #before_save :track
-    #before_save :ttt
-
-
-    def ttt
-      #@stock = Stock.find(params[:stock_id])
-      self.prediction = stock.symbol
-    end
+     
 
     def lookup
       
         YahooFinance::get_historical_quotes( stock.symbol,
                                       date,
                                       date ) do |row|
-              #puts "#{symbol},#{row.join(',')}"
-              #puts "#{row[4]}"
-              #puts date
-              #puts "-----looking up day 0---------"
+              
               self.day_zero_open = row[1]
               self.day_zero_close = row[4]        
         end        
-        #puts "-------**--------#{date}"
-
-        # if date.wday == 1
-        #   self.day_zero_open = 1000
-        # end
+        
     end
 
     def b_lookup
@@ -44,10 +31,7 @@ class Quote < ActiveRecord::Base
         YahooFinance::get_historical_quotes( stock.symbol,
                                       d,
                                       d ) do |row|
-              #puts "#{symbol},#{row.join(',')}"
-              #puts "#{row[4]}"
-              #puts d
-              #puts "------looking up day neg 1--------"
+              
               self.day_neg1_open = row[1]
               self.day_neg1_close = row[4]
 
@@ -63,7 +47,7 @@ class Quote < ActiveRecord::Base
       percent_change = ((change / day_neg1_open) * 100).round(2).abs
       puts "Day -1 Open #{day_neg1_open}---Day -1 Close #{day_neg1_close}--Change #{change}-percent: #{percent_change}---"
       
-      if percent_change > 1  
+      if percent_change > 0.55  
         def predict 
             if day_neg1_close > day_neg1_open
                 self.prediction = "up"

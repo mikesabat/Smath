@@ -5,8 +5,6 @@ class Stock < ActiveRecord::Base
   validates_uniqueness_of :symbol
   before_save :percent
   before_save :calculate
-  #before_save :sort
-
 
 
   def percent
@@ -24,15 +22,20 @@ class Stock < ActiveRecord::Base
     n = 5000
     d = quotes.sort_by {|q| q.date}
     d.each do |q|
+      
+      def quantify(x, q)
+        quantity = (x / q.day_neg1_close).to_i
+      end
+
       if q.prediction == "up"
-        quantity = (n / q.day_neg1_close).to_i
+        quantity = quantify(n, q)        
         buy = quantity * q.day_neg1_close
         sell = quantity * q.day_zero_open
         pl = sell - buy        
         puts "UP ---Date: #{q.date} -- Bank: #{n} -- Day -1 Close: #{q.day_neg1_close} -- Quantity: #{quantity} -- Total Buy: #{buy} -- Day 0 Open: #{q.day_zero_open} -- Sell: #{sell} -- P/L: #{pl}" 
         n += pl                     
       elsif q.prediction == "down"
-        quantity = (n / q.day_neg1_close).to_i
+        quantity = quantify(n, q)
         sell = quantity * q.day_neg1_close
         buy = quantity * q.day_zero_open
         pl = sell - buy
@@ -43,13 +46,5 @@ class Stock < ActiveRecord::Base
     end  
     puts "Our ending bank = #{n}"
     self.bank = n    
-  end  
-
-  def sort
-    d = quotes.sort_by {|q| q.date}
-    d.each do |q|
-      puts "-------------------------#{q.date}"
-    end
-  end
-  
+  end    
 end
