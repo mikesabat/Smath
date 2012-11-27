@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121117222344) do
+ActiveRecord::Schema.define(:version => 20121126230546) do
 
   create_table "banks", :force => true do |t|
     t.decimal  "start_amount"
@@ -28,18 +28,21 @@ ActiveRecord::Schema.define(:version => 20121117222344) do
     t.decimal  "day_zero_close"
     t.boolean  "win"
     t.string   "prediction"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.decimal  "gain_or_loss_percent"
   end
 
   create_table "stocks", :force => true do |t|
     t.text     "symbol"
     t.decimal  "win_percentage"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.decimal  "bank"
     t.date     "Quarter_1_date"
     t.decimal  "risk_gain_ratio"
+    t.decimal  "average_upside"
+    t.decimal  "average_dwonside"
   end
 
 end

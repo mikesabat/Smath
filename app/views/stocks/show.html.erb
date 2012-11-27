@@ -2,12 +2,17 @@
 
 <h1> Stock Symbol:  <%= @stock.symbol.upcase %> </h1>
 
+Text: <%= @stock.averages %>
+
 <p>  
  
 </br>
   <font color="red"><b>Prediction Win Percentage</b></font> 
   <%= @stock.win_percentage %> <br/>
-  $1,000 Investment returns: <%= @stock.bank %> 
+  $1,000 Investment returns: <%= @stock.bank %> <br/>
+  Average Upside = <%= @stock.average_upside %> <br/>
+  Average Downside = <%= @stock.average_dwonside %> <br/>
+  Risk Gain Ratio = <%= @stock.risk_gain_ratio %>
   
 </p>
 <!-- 
@@ -22,6 +27,8 @@
     <th>Win Y/N</th>
     <th></th>
     <th>Test prediction</th>
+    <th></th>
+    <th>Percent Gain or Loss</th>
   </tr> 
 
   <% @stock.quotes.each do |quote|  %>        
@@ -32,6 +39,8 @@
       <td> <%= quote.win %> </td> 
       <td></td>
       <td> <%= quote.prediction %> </td> 
+      <td></td>
+      <td><%= quote.gain_or_loss_percent %></td>
     </tr>   
 
   <% end %>

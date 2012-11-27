@@ -8,10 +8,16 @@ class Quote < ActiveRecord::Base
     before_save :lookup
     before_save :b_lookup
     before_save :price
-    #before_save :predict
-    #before_save :track
-     
-
+    #before_save :correct
+    # Can use correct method when need to correct data
+    
+  
+    def correct
+      self.gain_or_loss_percent = nil if gain_or_loss_percent != nil and prediction == 'fail'
+        puts "T*!*!*!*!*!*"
+      
+    end
+    
     def lookup
       
         YahooFinance::get_historical_quotes( stock.symbol,
@@ -45,9 +51,9 @@ class Quote < ActiveRecord::Base
     def price
       change = day_neg1_close - day_neg1_open
       percent_change = ((change / day_neg1_open) * 100).round(2).abs
-      puts "Day -1 Open #{day_neg1_open}---Day -1 Close #{day_neg1_close}--Change #{change}-percent: #{percent_change}---"
+      puts "Price method---Day -1 Open #{day_neg1_open}---Day -1 Close #{day_neg1_close}--Change #{change}-percent: #{percent_change}---"
       
-      if percent_change > 0.55  
+      if percent_change > 1
         def predict 
             if day_neg1_close > day_neg1_open
                 self.prediction = "up"
@@ -60,11 +66,11 @@ class Quote < ActiveRecord::Base
 
         def track
           if prediction == "up" and day_zero_open > day_neg1_close
-            self.win = true
+            self.win = true            
           elsif prediction == "down" and day_zero_open < day_neg1_close
             self.win = true
           else
-            true
+            
           end
             # elsif prediction == "up" and day_zero_close < day_neg1_close
             #     self.win = false
@@ -74,10 +80,12 @@ class Quote < ActiveRecord::Base
             #     #puts "-----*****-------"
                #self.win = true          
         end
+
         predict
         track
       else
-          self.prediction = "fail"   
+          self.prediction = "fail" 
+          self.win = 'nil'
       end
     end  
 end
