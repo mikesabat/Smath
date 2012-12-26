@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126230546) do
+ActiveRecord::Schema.define(:version => 20121214021118) do
 
   create_table "banks", :force => true do |t|
     t.decimal  "start_amount"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20121126230546) do
     t.decimal  "risk_gain_ratio"
     t.decimal  "average_upside"
     t.decimal  "average_dwonside"
+    t.string   "timing"
+    t.text     "notes"
   end
 
 end

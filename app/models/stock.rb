@@ -1,5 +1,5 @@
 class Stock < ActiveRecord::Base
-  attr_accessible :symbol, :win_percentage, :Quarter_1_date, :quotes_attributes
+  attr_accessible :symbol, :win_percentage, :Quarter_1_date, :quotes_attributes, :timing
   has_many :quotes, :dependent => :destroy
   accepts_nested_attributes_for :quotes
   validates_uniqueness_of :symbol
@@ -23,14 +23,15 @@ class Stock < ActiveRecord::Base
     total_plays = positives.size + negatives.size
     puts "------Total Plays for this stock = #{total_plays}--------"
     sum_positives = positives.inject(:+)
+    puts "Sum Positive ==== #{sum_positives}"
     sum_negatives = negatives.inject(:+)
-    puts "Sum of the negatives == #{sum_negatives}"
+    puts "Sum of the negatives ===== #{sum_negatives}"
     if positives.size > 0
-      self.average_upside = (sum_positives / positives.size).round(3)
+      self.average_upside = (sum_positives / positives.size).round(2)
     else
     end
     if negatives.size > 0
-      self.average_dwonside = (sum_negatives / negatives.size).round(3)
+      self.average_dwonside = (sum_negatives / negatives.size).round(2)
     end
     self.risk_gain_ratio = average_upside.to_f + average_dwonside.to_f
 

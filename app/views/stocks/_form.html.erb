@@ -16,6 +16,9 @@
     <%= f.label :symbol %><br />
     <%= f.text_field :symbol %><br />
 
+    <%= f.label "Announcement Timing" %><br />
+    <%= f.select :timing, ["Not Set", "Before Open", "After Close"] %><br />
+
     <%= f.label "Next Earnings Date" %><br />
     <%= f.date_select :Quarter_1_date %>
   </div>

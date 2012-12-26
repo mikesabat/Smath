@@ -8,6 +8,7 @@
     <th></th>
     <th>Win Percentage</th>
     <th></th>
+    <th>Risk Gain Ratio</th>
     <th>$5,000 Invenstment</th>
     
   </tr> 
@@ -15,12 +16,15 @@
   <% @stock.each do |stock| %>    
     <tr>
       <td><%= stock.Quarter_1_date %></td>
+      <td><%= stock.timing %></td>
       <td><%= link_to 'Show', stock %> </td>
       <td> <%= stock.symbol %> </td>
       <td></td>
       <td> <%= stock.win_percentage %> </td>
-      <td></td>
-      <td><%= stock.bank %></td>          
+      <td></td>      
+      <td><%= stock.risk_gain_ratio %></td>
+      <td><%= stock.bank %></td>
+
     </tr>       
   <% end %>
 
