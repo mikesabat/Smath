@@ -29,6 +29,7 @@ class StocksController < ApplicationController
 
   def index
     @stock = Stock.all
+    @scheduled_stocks = Stock.scheduled
 
     respond_to do |format|
       format.html #index.html.erb

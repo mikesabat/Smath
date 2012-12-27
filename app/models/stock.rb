@@ -6,6 +6,9 @@ class Stock < ActiveRecord::Base
   before_save :percent
   before_save :calculate  
   before_save :ratio
+  scope :scheduled, order('Quarter_1_date ASC')
+  # A named scope to find the stocks with a certain win percentage easily
+  scope :plays, where('win_percentage < 45')
 
   def ratio
     positives = []
