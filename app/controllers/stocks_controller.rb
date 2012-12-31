@@ -4,6 +4,11 @@ class StocksController < ApplicationController
     #3.times { @stock.quotes.build }
   end
 
+  def track
+    @positive_stock = Stock.positive_plays
+    @negative_stock = Stock.negative_plays
+  end
+
   def create
     @stock = Stock.new(params[:stock])
 

@@ -1,9 +1,13 @@
 Smash::Application.routes.draw do
   
+  match 'stocks/track' => 'stocks#track', :as => :track
+  
   root :to => "stocks#index"
   resources :stocks do
     resources :quotes
   end
+
+
 
 
   # The priority is based upon order of creation:

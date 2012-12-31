@@ -1,14 +1,17 @@
 class Stock < ActiveRecord::Base
   attr_accessible :symbol, :win_percentage, :Quarter_1_date, :quotes_attributes, :timing
-  has_many :quotes, :dependent => :destroy
+  has_many :quotes, :order => 'date', :dependent => :destroy
   accepts_nested_attributes_for :quotes
   validates_uniqueness_of :symbol
   before_save :percent
   before_save :calculate  
   before_save :ratio
+  # scheduled stocks scope orders the stocks for the index view
   scope :scheduled, order('Quarter_1_date ASC')
+
   # A named scope to find the stocks with a certain win percentage easily
-  scope :plays, where('win_percentage < 45')
+  scope :positive_plays, where('win_percentage > 60')
+  scope :negative_plays, where('win_percentage < 40')
 
   def ratio
     positives = []

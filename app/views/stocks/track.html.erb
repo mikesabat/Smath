@@ -1,0 +1,47 @@
+<h1> Tracking Stock Plays </h1>
+</br>
+<h2> Positive Plays </h2>
+
+<table>
+  <tr>
+    <th>Stock Name</th> 
+    <th>Quote Data</th>       
+    <th>Win?</th>   
+  </tr> 
+
+  <% @positive_stock.each do |stock| %>    
+    <tr>
+      <td><%= stock.symbol %></td>  
+      <td><%= stock.quotes.last.date %></td>  
+      <td><%= stock.quotes.last.win %></td>        
+    </tr>       
+  <% end %>
+
+</table>Track Page
+
+Positive Stock size = <%= @positive_stock.size %>
+
+</br>
+</br>
+</br>
+
+<h2> Negative Plays </h2>
+
+<table>
+  <tr>
+    <th>Stock Name</th> 
+    <th>Quote Data</th>       
+    <th>Win?</th>   
+  </tr> 
+
+  <% @negative_stock.each do |stock| %>    
+    <tr>
+      <td><%= stock.symbol %></td>  
+      <td><%= stock.quotes.last.date %></td>  
+      <td><%= stock.quotes.last.win %></td>        
+    </tr>       
+  <% end %>
+
+</table>
+
+NEgative Stock size = <%= @negative_stock.size %>
